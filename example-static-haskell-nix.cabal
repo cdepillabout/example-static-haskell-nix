@@ -11,7 +11,7 @@ author:              Dennis Gosnell
 maintainer:          cdep.illabout@gmail.com
 copyright:           2024-2024 Dennis Gosnell
 category:            Productivity
-build-type:          Custom
+build-type:          Simple
 extra-source-files:  README.md
                    , CHANGELOG.md
                    , default.nix
