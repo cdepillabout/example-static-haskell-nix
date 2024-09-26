@@ -12,4 +12,4 @@ defaultMain = do
   ByteString.putStr readme
 
 readme :: ByteString
-readme = $(embedFile "../README.md")
+readme = $(embedFile "README.md")

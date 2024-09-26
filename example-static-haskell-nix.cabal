@@ -23,6 +23,7 @@ library
   hs-source-dirs:      src
   exposed-modules:     ExampleStatic
   build-depends:       base >= 4.17
+                     , bytestring
                      , file-embed
   ghc-options:         -Wall -Wincomplete-uni-patterns -Wincomplete-record-updates
 
