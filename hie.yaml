@@ -1,0 +1,7 @@
+cradle:
+  cabal:
+    - path: "src"
+      component: "lib:example-static-haskell-nix"
+
+    - path: "app/Main.hs"
+      component: "example-static-haskell-nix:exe:example"

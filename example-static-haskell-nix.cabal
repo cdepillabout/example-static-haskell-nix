@@ -1,0 +1,38 @@
+cabal-version:       3.4
+
+name:                example-static-haskell-nix
+version:             0.1.0.1
+synopsis:            Example repo building a statically-linked Haskell binary with Nix
+-- description:         CLI tool
+homepage:            https://github.com/cdepillabout/example-static-haskell-nix
+license:             BSD-3-Clause
+license-file:        LICENSE
+author:              Dennis Gosnell
+maintainer:          cdep.illabout@gmail.com
+copyright:           2024-2024 Dennis Gosnell
+category:            Productivity
+build-type:          Custom
+extra-source-files:  README.md
+                   , CHANGELOG.md
+                   , default.nix
+                   , nix/default.nix
+                   , nix/overlay.nix
+                   , shell.nix
+
+library
+  hs-source-dirs:      src
+  exposed-modules:     ExampleStatic
+  build-depends:       base >= 4.17
+                     , file-embed
+  ghc-options:         -Wall -Wincomplete-uni-patterns -Wincomplete-record-updates
+
+executable example
+  main-is:             Main.hs
+  hs-source-dirs:      app
+  build-depends:       base
+                     , example-static-haskell-nix
+  ghc-options:         -Wall -threaded -rtsopts -with-rtsopts=-N
+
+source-repository head
+  type:     git
+  location: git@github.com:cdepillabout/example-static-haskell-nix.git

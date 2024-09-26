@@ -1,0 +1,42 @@
+name: build statically-linked Haskell binary
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+    # tags: ['v*']  # Run on tag creation for new releases
+  release:
+    types: [ "published" ]
+
+env:
+  CI_RELEASE: "${{ github.event_name == 'release' }}"
+
+jobs:
+  nix-static:
+    name: nix static / ubuntu-latest
+
+    permissions:
+      # This is required for this job to be able to upload release assets.
+      contents: write
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: cachix/install-nix-action@v27
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+
+      - uses: DeterminateSystems/magic-nix-cache-action@v8
+
+      - run: nix-build
+
+      - name: "(Release only) Publish statically-linked Linux x86_64 binary"
+        if: "${{ env.CI_RELEASE == 'true' }}"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        run: |
+          static_bin="example-static-linux-x86_64"
+          cp ./result/bin/example "${static_bin}"
+          gh release upload --clobber "${{ github.ref_name }}" "${static_bin}"
