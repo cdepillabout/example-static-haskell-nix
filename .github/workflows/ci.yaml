@@ -1,14 +1,25 @@
+# This is a simple GitHub Action that builds our statically-linked Haskell
+# executable with Nix.
+#
+# The only interesting thing here is the final step, which attaches the
+# statically-linked binary to every GitHub release.
+
 name: build statically-linked Haskell binary
 
 on:
   pull_request:
   push:
     branches: [master]
-    # tags: ['v*']  # Run on tag creation for new releases
+  # This makes sure we run this GitHub Action every time a new GitHub Release
+  # is created.
   release:
     types: [ "published" ]
 
 env:
+  # This ends up being set to `true` when this GitHub Action is triggered on a
+  # new GitHub Release.  We use this below to determine whether or not to try
+  # to attach our statically-linked Haskell binrary to the corresponding GitHub
+  # Release.
   CI_RELEASE: "${{ github.event_name == 'release' }}"
 
 jobs:
@@ -16,7 +27,7 @@ jobs:
     name: nix static / ubuntu-latest
 
     permissions:
-      # This is required for this job to be able to upload release assets.
+      # This is required for this job to be able to upload GitHub Release assets.
       contents: write
 
     runs-on: ubuntu-latest
@@ -28,11 +39,17 @@ jobs:
         with:
           nix_path: nixpkgs=channel:nixos-unstable
 
+      # This is quite a nice cache for Nix-based projects.  It caches all Nix
+      # store paths using the native GitHub Actions caching mechanism, instead
+      # of needing to use a third-party cache.
       - uses: DeterminateSystems/magic-nix-cache-action@v8
 
       - run: nix-build
 
+      # This step uses the `gh` command to upload our statically-linked Haskell
+      # binary to the newly-made GitHub Release.
       - name: "(Release only) Publish statically-linked Linux x86_64 binary"
+        # Only run this step when publishing a new GitHub Release.
         if: "${{ env.CI_RELEASE == 'true' }}"
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
