@@ -24,6 +24,8 @@ library
   exposed-modules:     ExampleStatic
   build-depends:       base >= 4.17
                      , bytestring
+                     -- See the src/ExampleStatic.hs file for an explanation of
+                     -- why we hae file-embed here.
                      , file-embed
   ghc-options:         -Wall -Wincomplete-uni-patterns -Wincomplete-record-updates
 
