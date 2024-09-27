@@ -28,6 +28,13 @@ let
     # Here's a URL you can use to find these PRs in the Nixpkgs repo:
     #
     # https://github.com/nixos/nixpkgs/pulls?q=is%3Apr+head%3Ahaskell-updates+is%3Aclosed+base%3Amaster+%22haskellPackages%3A+update%22+
+    #
+    # Also, keep in mind that full static linking currently only works with
+    # GHC-9.4, while the main GHC in Nixpkgs is 9.6.  This means that if you
+    # have a complex project that uses many Haskell dependencies, you may have
+    # an easier time going back to an earlier Nixpkgs where the main GHC was
+    # still 9.4, since more of the Haskell package set will be working by
+    # default.  See the note about this in ./overlays.nix.
     url = "https://github.com/NixOS/nixpkgs/archive/b6b063bdc265990fb87781682da974578b16443c.tar.gz";
     sha256 = "1q28fpgfhlix0rkpdvqxy8vnyv1hiz2wnkh66pxh49za1hjjimdg";
 
