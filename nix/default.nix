@@ -1,5 +1,9 @@
 # This file defines a Nixpkgs package set, and applies ./overlay.nix as an
 # overlay.
+#
+# You can jump into a repl session with this Nixpkgs loaded by doing:
+#
+# $ nix repl ./nix
 
 {...}:
 

@@ -110,3 +110,42 @@ Here are the files relevant relevant to the Haskell package:
 - [`example-static-haskell-nix.cabal`](./example-static-haskell-nix.cabal)
 - [`src/ExampleStatic.hs`](./src/ExampleStatic.hs)
 - [`app/Main.hs`](./app/Main.hs)
+
+## FAQ
+
+1. Q: **Is it possible to build a statically-linked x86-64 Linux Haskell executable with GHC-9.6+ from Nixpkgs?**
+
+    A: As of 2024-09-29, no. See <https://github.com/NixOS/nixpkgs/issues/275304>
+    for more information.
+
+2. Q: **What are other options for building statically-linked x86-64 Linux Haskell binaries?**
+
+    A: You have a few options:
+
+    - [haskell.nix](https://github.com/input-output-hk/haskell.nix)
+
+        This is an alternative infrastructure for building Haskell packages.
+        It is completely separate from the Haskell infrastructure in Nixpkgs.
+        It should be possible to build statically-linked executables with
+        haskell.nix. haskell.nix also supports other cross-compilation scenarios.
+
+    - [static-haskell-nix](https://github.com/nh2/static-haskell-nix)
+
+        This is a comprehensive Nixpkgs overlay that tries to get as much of
+        Hackage compiling with static-linking as possible.
+
+        The disadvantages of `static-haskell-nix` are:
+
+        - It is not frequently updated.  It is occassionally multiple GHC
+            releases behind Nixpkgs.
+        - It overrides many packages in Nixpkgs, so you end up having to
+            compile quite a lot from source.  (On the other hand, it does
+            provide its own Nix cache.)
+
+        The advantages of `static-haskell-nix` is that quite a lot of work goes
+        into getting system libraries compiling statically, even if it means
+        making deep changes that wouldn't otherwise be accepted in Nixpkgs.
+
+    - Use Apline Linux (or any other fully-statically-linked Linux distribution)
+        in Docker.  [Here](https://github.com/utdemir/ghc-musl) is an example
+        Docker image for this.
