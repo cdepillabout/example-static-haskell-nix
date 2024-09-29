@@ -26,6 +26,6 @@ readme =
   -- transitive dependency that uses TemplateHaskell, so it is good to confirm
   -- it is possible to use TemplateHaskell with your static-linking setup.
   --
-  -- The following uses TemplateHaskell with a function from file-embed library
-  -- to make sure this works.
+  -- The following is a TemplateHaskell expression using a function from the
+  -- `file-embed` library to make sure TemplateHaskell works.
   $(embedFile "README.md")
