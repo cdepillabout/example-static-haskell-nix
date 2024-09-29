@@ -1,7 +1,7 @@
 cabal-version:       3.4
 
 name:                example-static-haskell-nix
-version:             0.1.0.1
+version:             0.1.0.0
 synopsis:            Example repo building a statically-linked Haskell binary with Nix
 -- description:         CLI tool
 homepage:            https://github.com/cdepillabout/example-static-haskell-nix
