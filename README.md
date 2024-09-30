@@ -146,6 +146,13 @@ Here are the files relevant relevant to the Haskell package:
         into getting system libraries compiling statically, even if it means
         making deep changes that wouldn't otherwise be accepted in Nixpkgs.
 
+    - Hand-roll a mixed dynamic/static overlay, similar to older(?) versions
+        of static-haskell-nix.
+
+        There was some discussion about this [on Twitter](https://x.com/kerckhove_ts/status/1840377511789642011),
+        and a [good example](https://github.com/NorfairKing/bevel/blob/1394f694806949142d8e2cc63dbd1fd8fb5e2e48/nix/overlay.nix)
+        of the approach from [Tom Sydney Kerckhove](https://cs-syd.eu/).
+
     - Use Apline Linux (or any other fully-statically-linked Linux distribution)
         in Docker.  [Here](https://github.com/utdemir/ghc-musl) is an example
         Docker image for this.
