@@ -156,3 +156,15 @@ Here are the files relevant relevant to the Haskell package:
     - Use Apline Linux (or any other fully-statically-linked Linux distribution)
         in Docker.  [Here](https://github.com/utdemir/ghc-musl) is an example
         Docker image for this.
+
+3. Q: **Where can I find a more fully-worked example?**
+
+    A: You can find a fully fleshed-out example in my
+    [Cloudy repository](https://github.com/cdepillabout/cloudy).
+
+    The layout of the Nix code is very similar to this repo, but it includes a
+    few other niceties:
+
+    - a Haskell development shell
+    - an additional build target that uses the standard dynamic linking setup with glibc
+    - a more realistic CI setup, which tests plain Cabal- and Stack-based builds
